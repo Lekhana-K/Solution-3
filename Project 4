@@ -1,6 +1,8 @@
---MySql workbech--
+--MySql workbench--
+--create database--
 create database quizz;
 use quizz;
+--create table--
 CREATE TABLE questions (
   id INT(11) AUTO_INCREMENT,
   question VARCHAR(250) NOT NULL,
@@ -12,12 +14,14 @@ CREATE TABLE questions (
   PRIMARY KEY (id)
 );
 drop table questions;
+--insert table--
 INSERT INTO questions (question,option1,option2, option3, option4, answer) VALUES
 ('What is the capital of France?', 'Paris', 'London', 'Berlin', 'Madrid', 1),
 ('Which planet is known as the Red Planet?', 'Venus', 'Jupiter', 'Mars', 'Saturn', 3),
 ("What is the official language of India?", 'Hindi', 'English', 'Marati', 'Malayalam', 1),
 ('What is the largest country in the world?', 'Asia', 'China', 'America', 'Russia', 4),
 ('Which is the largest tea-producing state in India?', 'Assam', 'Nepal', 'karnataka', 'kerala', 1);
+--show table--
 select * from questions;
 
 --python connectivity--
