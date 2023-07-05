@@ -1,0 +1,75 @@
+--create dATABASE--
+create database BooksDB;
+--CREATE TABLE--
+create table BooksDB.books(
+title varchar(50),
+author varchar(50),
+genre varchar(50),
+year int,
+price int);
+show tables;
+--INSERT BALUES--
+insert into BooksDB.books values
+("Time will come","sundhar","motivation",2003,500),
+("Secret of money","Yogan","Motivation",2004,1000),
+("Love and life","Lekhana","Love",2010,2000),
+("One minute mystery","Maran","marvel",2015,3000),
+("Exercise for old","Micheal","Sports",2020,4000);
+--SHOE TABLES--
+select * from BooksDB.books;
+select title,author,genre,year,price from BooksDB.books
+where title="Love and life";
+update BooksDB.books set price=5000 where price=2000;
+delete from BooksDB.books where title="Exercise for old";
+select avg(price) from BooksDB.books;
+create table BooksDB.authors(
+author varchar(50),
+age int,
+place varchar(50));
+insert into BooksDB.authors values
+("Sundhar","Time will come"),
+("Yogan","Secret of money"),
+("Maran","Love and life"),
+("Micheal","One minute mystery"),
+("Lekhana","Exercise for old");
+select * from BooksDB.authors;
+select distinct title from BooksDB.books;
+-- removing duplicates using distinct from author
+select distinct title from BooksDB.author;
+
+-- update using book id
+update BooksDB.books set title="Time will come" where name="sundhar";
+update BooksDB.books set author="Love and life"  where name="lekhana";
+
+-- delete usimg st n0
+delete from BooksDB.uuthor where name="Lekhana";
+
+-- inner join
+use BooksDB;
+select 
+books.title,books.author,books.genre,books.year,books.price
+from books
+inner join author
+on books.author=author.author;
+select * from BooksDB.books;
+select * from BooksDB.author;
+
+-- left join
+use BooksDB;
+select 
+books.title,books.author,books.genre,books.year,books.price
+from books
+left join author
+on books.author=author.author;
+
+-- right join
+use BooksDB;
+select 
+books.title,books.author,books.genre,books.year,books.price
+from books
+right join author
+on books.name=author.name;
+
+
+
+
