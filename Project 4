@@ -1,0 +1,81 @@
+--MySql workbech--
+create database quizz;
+use quizz;
+CREATE TABLE questions (
+  id INT(11) AUTO_INCREMENT,
+  question VARCHAR(250) NOT NULL,
+  option1 VARCHAR(250) NOT NULL,
+  option2 VARCHAR(250) NOT NULL,
+  option3 VARCHAR(250) NOT NULL,
+  option4 VARCHAR(250) NOT NULL,
+  answer INT(20) NOT NULL,
+  PRIMARY KEY (id)
+);
+drop table questions;
+INSERT INTO questions (question,option1,option2, option3, option4, answer) VALUES
+('What is the capital of France?', 'Paris', 'London', 'Berlin', 'Madrid', 1),
+('Which planet is known as the Red Planet?', 'Venus', 'Jupiter', 'Mars', 'Saturn', 3),
+("What is the official language of India?", 'Hindi', 'English', 'Marati', 'Malayalam', 1),
+('What is the largest country in the world?', 'Asia', 'China', 'America', 'Russia', 4),
+('Which is the largest tea-producing state in India?', 'Assam', 'Nepal', 'karnataka', 'kerala', 1);
+select * from questions;
+
+--python connectivity--
+import mysql.connector
+# Establish MySQL connection
+connection = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="root",
+    database="quizz"
+)
+# Create a cursor object to interact with the database
+cursor = connection.cursor()
+# Function to retrieve and display quiz questionsmy
+def display_questions():
+    # Fetch questions from the database
+    query = "SELECT * FROM questions"
+    cursor.execute(query)
+    questions = cursor.fetchall()
+    # Display questions and options
+    for question in questions:
+        print("Question:", question[1])
+        print("Options:")
+        print("1. ", question[2])
+        print("2. ", question[3])
+        print("3. ", question[4])
+        print("4. ", question[5])
+        print()
+# Function to take user's answers and calculate the score
+def take_quiz():
+    score = 0
+    # Retrieve questions from the database
+    query = "SELECT * FROM questions"
+    cursor.execute(query)
+    questions = cursor.fetchall()
+    # Display questions and options
+    for question in questions:
+        print("Question:", question[1])
+        print("Options:")
+        print("1. ", question[2])
+        print("2. ", question[3])
+        print("3. ", question[4])
+        print("4. ", question[5])
+        print("Enter your answer (1-4):")
+        user_answer = int(input())
+        # Check if the answer is correct
+        if user_answer == question[6]:
+            score += 1
+    
+    return score
+
+# Main program
+print("Hi candidator!!!!")
+print("Welcome to the Quiz Competition!")
+print("Here are the questions:")
+print()
+# Display the questions
+display_questions()
+
+# Display the final score
+print("Quiz completed! Your score is:",take_quiz())
