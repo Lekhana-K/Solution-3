@@ -1,75 +1,80 @@
---create dATABASE--
+-- creating database
 create database BooksDB;
---CREATE TABLE--
-create table BooksDB.books(
-title varchar(50),
-author varchar(50),
-genre varchar(50),
-year int,
-price int);
-show tables;
---INSERT BALUES--
-insert into BooksDB.books values
-("Time will come","sundhar","motivation",2003,500),
-("Secret of money","Yogan","Motivation",2004,1000),
-("Love and life","Lekhana","Love",2010,2000),
-("One minute mystery","Maran","marvel",2015,3000),
-("Exercise for old","Micheal","Sports",2020,4000);
---SHOE TABLES--
-select * from BooksDB.books;
-select title,author,genre,year,price from BooksDB.books
-where title="Love and life";
-update BooksDB.books set price=5000 where price=2000;
-delete from BooksDB.books where title="Exercise for old";
-select avg(price) from BooksDB.books;
-create table BooksDB.authors(
-author varchar(50),
-age int,
-place varchar(50));
-insert into BooksDB.authors values
-("Sundhar","Time will come"),
-("Yogan","Secret of money"),
-("Maran","Love and life"),
-("Micheal","One minute mystery"),
-("Lekhana","Exercise for old");
-select * from BooksDB.authors;
-select distinct title from BooksDB.books;
+
+-- creating table books
+create table BooksDB.Bookss(
+Books_id int primary key auto_increment,
+Books_Title varchar(50),
+Books_Author varchar(50),
+Books_genre varchar(100),
+publication_year int ,
+Book_price int 
+);
+-- creating table author
+create table BooksDB.Author(
+SI_NO int primary key auto_increment,
+Author_name varchar(50),
+Book_Title varchar(50),
+foreign key(SI_NO) References Books(Books_id)
+);
+
+-- display table books
+select * from BooksDB.Books;
+
+-- display table author
+select * from BooksDB.Author;
+
+-- insert values into books
+insert into BooksDB.Books values
+(1,"The Red and The Black","Stendhal","Fiction",1830,1000),
+(2,"The Pride and Prejudice","Jane Austen","Non Fiction",1813,1050),
+(3,"Moby Dick","Herman Melville","Comedy",1851,1001),
+(4,"War And Peace","Tolstoy","History",1869,299),
+(5,"The Brothers Karamazov","Dostoevsky","Poetry",1810,500);
+
+-- insert values into author
+insert into BooksDB.Author values
+(1,"Mahatma Gandhi","The Story of Truth"),
+(2,"R.K.Narayan","The Giude"),
+(3,"Rohinton Mistry","A Fine Balance"),
+(4,"Salman Rushidie","Midnights Cildren"),
+(5,"Vikram Seth","A Suitable Boy");
+
+-- removing duplicates using distinct from books
+select distinct Books_Title from BooksDB.Books;
+
 -- removing duplicates using distinct from author
-select distinct title from BooksDB.author;
+select distinct Book_Title from BooksDB.Author;
 
 -- update using book id
-update BooksDB.books set title="Time will come" where name="sundhar";
-update BooksDB.books set author="Love and life"  where name="lekhana";
+update BooksDB.Books set Books_Title="Gitanjali" where Books_id=5;
+update BooksDB.Books set Books_Author="Rabindhranath Tagore" where Books_id=5;
 
 -- delete usimg st n0
-delete from BooksDB.uuthor where name="Lekhana";
+delete from BooksDB.Author where SI_NO=5;
 
 -- inner join
 use BooksDB;
 select 
-books.title,books.author,books.genre,books.year,books.price
-from books
-inner join author
-on books.author=author.author;
-select * from BooksDB.books;
-select * from BooksDB.author;
+Books.Books_id,Books.Books_Title,Books.Books_Author,Books.Books_genre,Books.publication_year,Books.Book_price
+from Books
+inner join Author
+on Books.Books_id=Author.SI_NO;
+select * from BooksDB.Books;
+select * from BooksDB.Author;
 
 -- left join
 use BooksDB;
 select 
-books.title,books.author,books.genre,books.year,books.price
-from books
-left join author
-on books.author=author.author;
+Books.Books_id,Books.Books_Title,Books.Books_Author,Books.Books_genre,Books.publication_year,Books.Book_price
+from Books
+left join Author
+on Books.Books_id=Author.SI_NO;
 
 -- right join
 use BooksDB;
 select 
-books.title,books.author,books.genre,books.year,books.price
-from books
-right join author
-on books.name=author.name;
-
-
-
-
+Books.Books_id,Books.Books_Title,Books.Books_Author,Books.Books_genre,Books.publication_year,Books.Book_price
+from Books
+right join Author
+on Books.Books_id=Author.SI_NO;
